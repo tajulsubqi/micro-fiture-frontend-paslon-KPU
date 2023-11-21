@@ -1,11 +1,12 @@
 import DetailPage from "../components/DetailPage";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import NavbarLog from "../components/navbar/Navbar";
+// import Navbar from "../components/Navbar";
 
 export default function Detail() {
   return (
     <>
-      <Navbar />
+      <NavbarLog />
       <DetailPage />
       <Footer />
     </>

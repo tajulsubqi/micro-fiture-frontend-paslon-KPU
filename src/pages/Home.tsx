@@ -1,43 +1,48 @@
-// import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import NavbarLog from "../components/navbar/Navbar";
 import Jumbotron from "../components/Jumbotron";
-import BigCard from "../components/BigCard";
-import SmallCard from "../components/SmallCard";
+import BigCard from "../components/card/BigCard";
+import SmallCard from "../components/card/SmallCard";
 import Rectangle from "../components/Rectangle";
 import Footer from "../components/Footer";
 
 export default function Home() {
   const data = [
     {
+      id: 1,
       date: Date.now(),
       title: "KPU TETAPKAN 3 MENTOR TERBAIK",
-      author: "super Admin",
+      author: "Gojo",
     },
     {
+      id: 2,
       date: Date.now(),
-      title: "KPU TETAPKAN 3 MENTOR TERBAIK",
-      author: "super Admin",
+      title: "KPU TERBAIK",
+      author: "Sukuna",
     },
     {
+      id: 3,
       date: Date.now(),
-      title: "KPU TETAPKAN 3 MENTOR TERBAIK",
-      author: "super Admin",
+      title: "KPU ",
+      author: "Toji",
     },
     {
+      id: 4,
       date: Date.now(),
       title: "KPU TETAPKAN 3 MENTOR TERBAIK",
-      author: "super Admin",
+      author: "Yuji",
     },
     {
+      id: 5,
       date: Date.now(),
       title: "KPU TETAPKAN 3 MENTOR TERBAIK",
-      author: "super Admin",
+      author: "Megumi",
     },
   ];
 
   return (
     <>
-      <Navbar />
+      <NavbarLog />
+      {/* <Navbar /> */}
       <Jumbotron />
       <div className="container-fluid mt-5" style={{ maxWidth: "1165px" }}>
         <div className="row g-3">
@@ -48,7 +53,9 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <Rectangle />
+      <div className="mt-5">
+        <Rectangle />
+      </div>
       <Footer />
     </>
   );

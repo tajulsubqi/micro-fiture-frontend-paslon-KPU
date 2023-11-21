@@ -1,0 +1,24 @@
+.card-vote {
+  background-color: #dedede;
+  transition: .5s;
+}
+
+.card-vote:hover {
+  background-color: #fff;
+  transform: scale(1.1);
+}
+
+
+
+.btn-1 {
+  color: #fff;
+  background-color: #5E5A00;
+  width: 400px;
+}
+
+.btn-1:hover {
+  color: #fff;
+  background-color: #413f00;
+  transition: .3s;
+  width: 400px;
+}

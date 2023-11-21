@@ -6,8 +6,8 @@ export default function DetailPage() {
   return (
     <div className="container">
       <div className="container p-3 bg-white pb-4" style={{ width: "1140px" }}>
-        <button type="button" className="btn btn-dark" onClick={() => navigate("/")}>
-        <i className="fa-solid fa-arrow-left"></i> beranda
+        <button type="button" className="btn btn-dark mt-1" onClick={() => navigate("/")}>
+          <i className="fa-solid fa-arrow-left"></i> beranda
         </button>
 
         <div className="text-center">

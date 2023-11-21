@@ -1,11 +1,11 @@
+import ListPartai from "../components/ListPartai";
 import NavDashboard from "../components/navbar/NavDashboard";
-import ListPaslon from "../components/ListPaslon";
 
-export default function Paslon() {
+export default function Partai() {
   return (
     <>
       <NavDashboard />
-      <ListPaslon />
+      <ListPartai />
     </>
   );
 }
