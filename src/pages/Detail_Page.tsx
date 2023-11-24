@@ -1,4 +1,4 @@
-import DetailPage from "../components/DetailPage";
+import DetailPage from "../components/Detail";
 import Footer from "../components/Footer";
 import NavbarLog from "../components/navbar/Navbar";
 // import Navbar from "../components/Navbar";

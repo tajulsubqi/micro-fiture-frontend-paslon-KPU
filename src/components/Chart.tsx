@@ -65,7 +65,7 @@ const Chart: React.FC<Chart> = () => {
   return (
     <div className="Container my-5 mx-auto" style={{ width: 1140 }}>
       <VoteModal show={showVoteModal} onHide={handleCloseVoteModal} handleVote={handleVote} />
-      <h1 className="text-center fw-bold mb-5" style={{ color: "#5E5A00" }}>
+      <h1 className="text-center fw-bold mb-5" style={{ color: "#5E5A00", marginTop: "7rem" }}>
         INFO PEMILU TERUPDATE
       </h1>
       <div className="d-flex justify-content-around">
@@ -82,7 +82,7 @@ const Chart: React.FC<Chart> = () => {
         </div>
       </div>
       <div className="d-flex justify-content-center mt-5">
-        <button onClick={handleOpenVoteModal} className="btn text-white fw-bold fs-5 px-4" style={{ backgroundColor:"#5E5A00" }}>
+        <button onClick={handleOpenVoteModal} className="btn text-white fw-bold fs-5 px-4" style={{ backgroundColor: "#5E5A00" }}>
           MASUKKAN PILIHANMU
         </button>
       </div>

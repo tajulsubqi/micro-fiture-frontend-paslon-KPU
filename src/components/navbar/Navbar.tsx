@@ -1,30 +1,57 @@
-import { useState, useEffect } from "react";
-import LoginModal from "../modals/LoginModal";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserCtx } from "../../libs/MyContext";
+import "./navbar.css";
 
 const NavbarLog = () => {
-  const [isLogin] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [state, dispatch] = useContext(UserCtx);
+  const { isLogin, user } = state;
+  const navigate = useNavigate();
 
-  const handleCLickLogin = () => {
-    setShowLoginModal(true);
+  const handleLoginLogout = () => {
+    if (isLogin) {
+      // Jika sudah login, lakukan aksi logout
+      dispatch({ type: "LOGOUT" });
+
+      // Lakukan navigasi atau aksi logout yang sesuai
+      navigate("/");
+    } else {
+      // Jika belum login, arahkan ke halaman login
+      navigate("/login");
+    }
   };
 
-  const handleCloseModal = () => {
-    setShowLoginModal(false);
+  const handlePartaiClick = () => {
+    if (isLogin) {
+      navigate("/admin/partai");
+    } else {
+      navigate("/addpartai");
+    }
   };
 
-  const handleLogin = () => {
-    handleCloseModal();
+  const handlePaslonClick = () => {
+    if (isLogin) {
+      navigate("/admin/paslon");
+    } else {
+      navigate("/addpaslon");
+    }
   };
+
+  const handleVoteClick = () => {
+    if (isLogin) {
+      navigate("/admin/vote");
+    } else {
+      navigate("/vote");
+    }
+  };
+
   return (
     <div>
-      <LoginModal show={showLoginModal} handleClose={handleCloseModal} handleLogin={handleLogin} />
-
       <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ backgroundColor: "black" }}>
         <div className="container">
           <a href="/">
             {" "}
-            <img src="./public/logo.png" alt="logo" width="40px" className="py-1" />
+            <img src="../public/logo.png" alt="logo" width="40px" className="py-1" />
           </a>
 
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,28 +60,37 @@ const NavbarLog = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active fw-bold" aria-current="page" href="/admin">
-                  PEMILU PRESIDEN DUMBWAYS.ID
+                <a className="navbar-link fw-bold ms-2 text-decoration-none" aria-current="page" href="/admin">
+                  {isLogin ? "DASHBOARD PEMILU" : "PEMILU PRESIDEN DUMBWAYS.ID"}
                 </a>
               </li>
             </ul>
           </div>
           <div className="d-flex flex-row text-white text-center">
-            <a href="/addpartai" className="text-decoration-none text-light p-2">
+            <a className="list text-decoration-none p-2" onClick={handlePartaiClick}>
               Partai
             </a>
             <div className="p-2">|</div>
-            <a href="/addpaslon" className="text-decoration-none text-light p-2">
+            <a className="list text-decoration-none p-2" onClick={handlePaslonClick}>
               Paslon
             </a>
             <div className="p-2">|</div>
-            <a href="/vote" className="text-decoration-none text-light p-2">
+            <a className={`list text-decoration-none p-2 ${isLogin ? "hidden" : ""}`} onClick={handleVoteClick}>
               Voting
             </a>
           </div>
-          <button className="btn btn-light btn-sm ms-4 fw-bold border rounded text-decoration-none bg-white" onClick={handleCLickLogin}>
-            {isLogin ? "Logout" : "Login"}
-          </button>
+          {isLogin ? (
+            <div className="ms-4">
+              <button className="nav-btn btn-sm fw-bold border rounded text-decoration-none" onClick={handleLoginLogout}>
+                Logout
+              </button>
+              <span className="text-dark ms-4 btn bg-light fw-bold rounded-circle">D{user.name}</span>
+            </div>
+          ) : (
+            <a href="/login" className="nav-btn btn-sm ms-4 fw-bold border rounded text-decoration-none" onClick={handleLoginLogout}>
+              Login
+            </a>
+          )}
         </div>
       </nav>
     </div>

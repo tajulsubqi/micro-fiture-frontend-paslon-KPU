@@ -31,7 +31,7 @@ export default function Admin() {
   ];
 
   return (
-    <div className="container mb-5" style={{ width: "1140px" }}>
+    <div className="container mb-5" style={{ width: "1140px", marginTop:"7rem" }}>
       <h1 className="text-center mt-5 fw-bold" style={{ color: "#5E5A00" }}>
         DASHBOARD
       </h1>

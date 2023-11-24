@@ -1,0 +1,27 @@
+.list,
+.navbar-link {
+  color: white;
+  transition: .2s;
+}
+
+.list:hover,
+.navbar-link:hover {
+  color: tomato;
+  transform: scale(1.1);
+}
+
+.nav-btn {
+  background-color: #ddd;
+  color: #000;
+  padding: 2px 8px;
+  transition: .3s;
+}
+
+.nav-btn:hover {
+  background-color: tomato;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}

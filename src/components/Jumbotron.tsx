@@ -1,7 +1,7 @@
 export default function Jumbotron() {
   return (
     <>
-      <div className="container mt-5 rounded-4" style={{ width: "1140px", height: "516px", background: "linear-gradient(to right, #750606a5, #5C0303)" }}>
+      <div className="container  rounded-4" style={{ width: "1140px", marginTop:"7rem", height: "516px", background: "linear-gradient(to right, #750606a5, #5C0303)" }}>
         <div className="row d-flex">
           <div className="col-8 ">
             <div style={{ marginLeft: "-15px" }}>

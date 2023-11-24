@@ -8,7 +8,7 @@ export default function AddPartai() {
   return (
     <div>
       <NavbarLog />
-      <Container style={{ width: 1140 }}>
+      <Container style={{ width: 1140 , marginTop:"7rem"}}>
         <h1 className="text-center my-5 fw-bold " style={{ color: "#5E5A00" }}>
           ADD PARTAI
         </h1>

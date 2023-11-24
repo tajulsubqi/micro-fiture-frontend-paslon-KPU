@@ -1,10 +1,10 @@
 import { Table, Image } from "react-bootstrap";
 
-export default function ListPaslon() {
+export default function ListPartai() {
   return (
-    <div className="container" style={{ width: "1140px" }}>
+    <div className="container" style={{ width: "1140px", marginTop: "3rem" }}>
       <h1 className="text-center py-5 fw-bold" style={{ color: "#5E5A00" }}>
-        LIST PASLON
+        LIST PARTAI
       </h1>
       <div className="mx-auto">
         <Table className="table table-bordered border-secondary-subtle" striped bordered hover>

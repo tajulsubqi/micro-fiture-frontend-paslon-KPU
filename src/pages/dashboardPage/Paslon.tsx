@@ -1,10 +1,10 @@
 import AddPaslon from "../../components/dashboard/AddPaslon";
-import NavDashboard from "../../components/navbar/NavDashboard";
+import NavbarLog from "../../components/navbar/Navbar";
 
 export default function Paslon() {
   return (
     <>
-      <NavDashboard />
+      <NavbarLog/>
       <AddPaslon />
     </>
   );
