@@ -1,12 +1,13 @@
 import React, { FormEvent, ChangeEvent, useState } from "react";
 import { API } from "../../libs/api";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type Register = {
-  fullname: string;
+  fullName: string;
   alamat: string;
-  jeniskelamin: string;
-  email: string;
+  jenisKelamin: string;
+  username: string;
   password: string;
 };
 
@@ -14,10 +15,10 @@ const Register: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = React.useState<Register>({
-    fullname: "",
+    fullName: "",
     alamat: "",
-    jeniskelamin: "",
-    email: "",
+    jenisKelamin: "",
+    username: "",
     password: "",
   });
 
@@ -38,12 +39,12 @@ const Register: React.FC = () => {
         "Content-Type": "application/json",
       };
 
-      const response = await API.post("/auth/register", user, { headers });
+      const response = await API.post("http://localhost:5000/api/v1/auth/register", user, { headers });
 
       console.log(response);
       navigate("/login");
-    } catch (err) {
-      throw err;
+    } catch (error: any) {
+      console.error("Registration failed:", error.response ? error.response.data : "Unknown error");
     }
   }
 
@@ -60,7 +61,7 @@ const Register: React.FC = () => {
           <label htmlFor="fullName" className="form-label fw-bold" style={{ color: "#5E5A00" }}>
             Fullname
           </label>
-          <input onChange={handleChange} type="text" className="form-control" id="fullName" name="fullname" />
+          <input onChange={handleChange} type="text" className="form-control" id="fullName" name="fullName" />
         </div>
 
         <div className="mb-3">
@@ -74,14 +75,14 @@ const Register: React.FC = () => {
           <label htmlFor="alamat" className="form-label fw-bold" style={{ color: "#5E5A00" }}>
             Jenis Kelamin
           </label>
-          <input onChange={handleChange} type="text" className="form-control" id="jeniskelamin" name="jeniskelamin" />
+          <input onChange={handleChange} type="text" className="form-control" id="jenisKelamin" name="jenisKelamin" />
         </div>
 
         <div className="mb-3">
           <label htmlFor="username" className="form-label fw-bold" style={{ color: "#5E5A00" }}>
             Username
           </label>
-          <input onChange={handleChange} type="email" className="form-control" id="username" name="email" />
+          <input onChange={handleChange} type="email" className="form-control" id="username" name="username" />
         </div>
 
         <div className="mb-3">
@@ -100,7 +101,9 @@ const Register: React.FC = () => {
           SUBMIT
         </button>
         <p className="text-center mt-4 fst-italic">
-          <a href="/login">Login</a>
+          {" "}
+          Silahkan
+          <Link to="/login"> Login</Link>
         </p>
       </form>
     </div>

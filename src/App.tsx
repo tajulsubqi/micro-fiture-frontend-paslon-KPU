@@ -15,8 +15,10 @@ import { PrivateRoute, PrivateRouteAdmin, PrivateRouteUser } from "./utils/Priva
 import React, { useContext, useEffect } from "react";
 import { UserCtx } from "./libs/MyContext";
 import { setAuthToken, API } from "./libs/api";
+// import { useNavigate } from "react-router-dom";
 
 export default function App() {
+  // const navigate = useNavigate();
   const [isLoading, setLoading] = React.useState<boolean>(true);
   const [state, dispatch] = useContext(UserCtx)!;
 
@@ -36,10 +38,29 @@ export default function App() {
 
   async function cekUser() {
     try {
-      const response = await API.get("/auth/check");
-      console.log(response.data.user);
-      const payload = response.data.user;
-      payload.token = localStorage.token;
+      // Periksa apakah token tersedia
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        // Jika tidak ada token, mungkin pengguna belum login
+        dispatch({
+          type: "AUTH_ERROR",
+          payload: {},
+        });
+        setLoading(false);
+        return;
+      }
+
+      // Jika token tersedia, sertakan dalam header permintaan
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      const response = await API.get("http://localhost:5000/api/v1/user", { headers });
+
+      console.log(response.data);
+      const payload = response.data;
+      payload.token = token;
 
       console.log(payload);
 
@@ -57,6 +78,8 @@ export default function App() {
       setLoading(false);
     }
   }
+
+  // ...
 
   return (
     <>

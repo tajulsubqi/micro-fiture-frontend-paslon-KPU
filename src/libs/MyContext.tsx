@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, Dispatch, ReactNode } from "react";
+import React, { createContext, useReducer, Dispatch, ReactNode, useEffect } from "react";
 
 interface State {
   isLogin: boolean;
@@ -49,6 +49,18 @@ interface UserContextProviderProps {
 
 export const UserContextProvider: React.FC<UserContextProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      // Jika token ditemukan, inisialisasikan state berdasarkan token
+      dispatch({
+        type: "USER_SUCCESS",
+        payload: { token: storedToken },
+      });
+    }
+  }, []);
 
   return <UserCtx.Provider value={[state, dispatch]}>{children}</UserCtx.Provider>;
 };

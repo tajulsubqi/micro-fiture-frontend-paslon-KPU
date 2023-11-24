@@ -1,11 +1,11 @@
 import { useState, ChangeEvent, FormEvent, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { API, setAuthToken } from "../../libs/api";
 import { UserCtx } from "../../libs/MyContext";
 
 type Login = {
-  email: string;
+  username: string;
   password: string;
 };
 
@@ -16,7 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<Login>({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -36,7 +36,10 @@ const Login = () => {
         "Content-type": "application/json",
       };
 
-      const response = await API.post("/auth/login", user, { headers });
+      const response = await API.post("http://localhost:5000/api/v1/auth/login", user, { headers });
+
+      // Simpan token ke dalam localStorage
+      // localStorage.setItem("token", response.data.token);
 
       dispatch({
         type: "LOGIN_SUCCESS",
@@ -47,8 +50,23 @@ const Login = () => {
 
       console.log(response.data);
       navigate("/admin");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.response) {
+        // Kesalahan respons dari server
+        console.error("Kesalahan respons dari server:", error.response.data);
+        // Tampilkan pesan kesalahan kepada pengguna
+        alert(error.response.data.message);
+        dispatch({
+          type: "AUTH_ERROR", // atau "LOGOUT"
+          payload: {},
+        });
+      } else if (error.request) {
+        // Tidak ada respons dari server
+        console.error("Tidak ada respons dari server:", error.request);
+      } else {
+        // Kesalahan lainnya
+        console.error("Kesalahan lainnya:", error.message);
+      }
     }
   }
 
@@ -67,7 +85,7 @@ const Login = () => {
             <label htmlFor="userName" className="form-label fw-bold" style={{ color: "#5E5A00" }}>
               Username
             </label>
-            <input onChange={handleChange} type="email" className="form-control" id="userName" name="email" />
+            <input onChange={handleChange} type="email" className="form-control" id="userName" name="username" />
           </div>
 
           <div className="mb-3">
@@ -86,7 +104,7 @@ const Login = () => {
             SUBMIT
           </button>
           <p className="text-center mt-4 fst-italic">
-            Belum memiliki akun ? <a href="/register">Register</a>
+            Belum memiliki akun ? <Link to="/register">Register</Link>
           </p>
         </form>
       </div>
