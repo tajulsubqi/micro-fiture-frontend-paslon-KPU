@@ -1,29 +1,29 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { UserCtx } from "../libs/MyContext";
-import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom"
+import { UserCtx } from "../libs/MyContext"
+import { useContext } from "react"
 
 //LOGIN ?
 export const PrivateRoute = () => {
-  const [state, _] = useContext(UserCtx)!;
-  if (state.isLogin) return <Outlet />;
+  const [state, _] = useContext(UserCtx)!
+  if (state.isLogin) return <Outlet />
 
-  return <Navigate to="/login" />;
-};
+  return <Navigate to="/login" />
+}
 
 // LOGIN SEBAGAI USER
 export const PrivateRouteUser = () => {
-  const [state, _] = useContext(UserCtx)!;
-  if (state.user.role === "customer") return <Outlet />;
-  return <Navigate to="/" />;
-};
+  const [state, _] = useContext(UserCtx)!
+  if (state.user.role === "customer") return <Outlet />
+  return <Navigate to="/" />
+}
 
 //LOGIN SEBAGAI ADMIN
 export const PrivateRouteAdmin = () => {
-  const [state, _] = useContext(UserCtx)!;
-  if (state.user.role === "admin") return <Outlet />;
+  const [state, _] = useContext(UserCtx)!
+  if (state.user.role === "admin") return <Outlet />
 
-  return <Navigate to="/" />;
-};
+  return <Navigate to="/" />
+}
 
 // export default function PrivateRoutes() {
 //   const [state, _] = useContext(UserCtx);

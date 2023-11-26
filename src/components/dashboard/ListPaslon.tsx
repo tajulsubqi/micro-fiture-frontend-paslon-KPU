@@ -1,8 +1,53 @@
-import { Table, Image } from "react-bootstrap";
+import { Table } from "react-bootstrap"
+import { useEffect, useState } from "react"
+import { API } from "../../libs/api"
+
+type ListPaslon = {
+  noUrut: number
+  image: string
+  nama: string
+  visiMisi: string
+  koalisi: string
+}
 
 export default function ListPaslon() {
+  const [paslonList, setPaslonList] = useState<ListPaslon[]>([])
+
+  const fetchPaslonList = async () => {
+    try {
+      const response = await API.get("/paslon")
+      console.log(response.status, response.data)
+
+      if (Array.isArray(response.data.data)) {
+        setPaslonList(response.data.data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchPaslonList()
+  }, [])
+
+  const renderPaslonList = () => {
+    return paslonList.map((list: any) => (
+      <tr key={list.id}>
+        <td className="text-center fw-bold fs-5">{list.noUrut}</td>
+        <td style={{ width: "100px" }}>
+          <div>
+            <img src={list.image} alt="image" width={100} height={100} />
+          </div>
+        </td>
+        <td className="text-center">{list.nama}</td>
+        <td>{list.visiMisi}</td>
+        <td style={{ width: 350 }}>{list.koalisi}</td>
+      </tr>
+    ))
+  }
+
   return (
-    <div className="container" style={{ width: "1140px" , marginTop:"3rem" }}>
+    <div className="container" style={{ width: "1140px", marginTop: "3rem" }}>
       <h1 className="text-center py-5 fw-bold" style={{ color: "#5E5A00" }}>
         LIST PASLON
       </h1>
@@ -17,26 +62,9 @@ export default function ListPaslon() {
               <th>Koalisi</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td className="text-center">
-                <div>1</div>
-              </td>
-              <td className="" width={400}>
-                <div>
-                  <Image src="/public/carousel/anis.png" alt="Gambar" thumbnail />
-                </div>
-              </td>
-              <td className="text-center">
-                <p>Anis</p>
-              </td>
-              <td>Data 3</td>
-              <td>Data 4</td>
-            </tr>
-            {/* Tambahkan baris tambahan sesuai kebutuhan */}
-          </tbody>
+          <tbody>{renderPaslonList()}</tbody>
         </Table>
       </div>
     </div>
-  );
+  )
 }

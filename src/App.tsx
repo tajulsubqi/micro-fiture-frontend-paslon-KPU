@@ -24,9 +24,6 @@ export default function App() {
 
   console.log(state);
 
-  // cek kalau sudah ada token
-  // fungsi untuk triger ngecek tokennya
-
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -56,7 +53,7 @@ export default function App() {
         Authorization: `Bearer ${token}`,
       };
 
-      const response = await API.get("http://localhost:5000/api/v1/user", { headers });
+      const response = await API.get("/user", { headers });
 
       console.log(response.data);
       const payload = response.data;

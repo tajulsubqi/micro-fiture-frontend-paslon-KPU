@@ -49,5 +49,5 @@ export default function ListVoter() {
         <h3 className="pt-3 pb-5">TOTAL SUARA TERKUMPUL : 1000 VOTERS</h3>
       </div>
     </div>
-  );
+  )
 }
